@@ -1,0 +1,71 @@
+function ContributionView({ repo, state, contributions, selected, onSelect, onFind, onGenerate }: { repo: RepositoryAnalysis; state: 'idle' | 'loading' | 'ready' | 'error'; contributions: Contribution[]; selected: Contribution | null; onSelect: (contribution: Contribution) => void; onFind: () => void; onGenerate: () => void }) {
+  return (
+    <div className="view-stack contributions-view">
+      <section className="contribution-hero">
+        <div>
+          <div className="eyebrow"><span className="eyebrow-line" /> CONTRIBUTION RADAR</div>
+          <h2>Find my first contribution.</h2>
+          <p>Start with a task that fits the project’s existing patterns, not a random issue from the backlog.</p>
+        </div>
+        <button className="primary-button" onClick={onFind} disabled={state === 'loading'}>
+          {state === 'loading' ? <><Loader2 size={15} className="spin" /> Finding a fit...</> : <><WandSparkles size={15} /> Find a contribution</>}
+        </button>
+      </section>
+      {state === 'error' && <div className="inline-error"><AlertCircle size={14} /> AI analysis failed. <button onClick={onFind}>Try again</button></div>}
+      <div className="contribution-grid">
+        <div className="contribution-list">
+          <div className="panel-header">
+            <div><span className="panel-kicker">RECOMMENDATIONS</span><strong>{state === 'loading' ? 'Scanning project signals...' : `${contributions.length} realistic starting points`}</strong></div>
+            <span className="signal-chip"><span className="status-dot" /> Low-risk focus</span>
+          </div>
+          {state === 'loading' ? (
+            <div className="contribution-loading"><div className="loading-orbit"><Sparkles size={17} /></div><strong>Looking for a contribution with context.</strong><p>Checking isolation, existing patterns and likely surface area.</p></div>
+          ) : contributions.map((contribution, index) => (
+            <button key={contribution.id} className={`contribution-list-item ${selected?.id === contribution.id ? 'is-selected' : ''}`} onClick={() => onSelect(contribution)}>
+              <span className="contribution-number">0{index + 1}</span>
+              <span><strong>{contribution.title}</strong><small>{contribution.difficulty} · {contribution.effort}</small></span>
+              <ArrowUpRight size={15} />
+            </button>
+          ))}
+        </div>
+        <div className="panel contribution-detail-panel">
+          {selected ? (
+            <div className="detail-inner">
+              <div className="recommendation-label"><span className="pulse-dot" /> YOUR RECOMMENDED CONTRIBUTION</div>
+              <h3>{selected.title}</h3>
+              <div className="contribution-meta-grid">
+                <MetaStat label="Difficulty" value={selected.difficulty} tone="violet" />
+                <MetaStat label="Estimated effort" value={selected.effort} tone="blue" />
+                <MetaStat label="Impact" value={selected.impact} tone="mint" />
+                <MetaStat label="Files involved" value={String(selected.filesInvolved)} tone="amber" />
+                <MetaStat label="Risk" value={selected.risk} tone="mint" />
+              </div>
+              <div className="why-card"><div className="why-icon"><Lightbulb size={16} /></div><div><span className="detail-label">WHY THIS CONTRIBUTION?</span><p>{selected.why}</p></div></div>
+              <div className="detail-actions">
+                <button className="primary-button small" onClick={onGenerate}><MessageSquareText size={14} /> Generate GitHub Issue</button>
+                <button className="ghost-button small" onClick={() => window.scrollTo({ top: document.body.scrollHeight, behavior: 'smooth' })}>See implementation plan <ArrowUpRight size={13} /></button>
+              </div>
+            </div>
+          ) : (
+            <div className="empty-detail"><WandSparkles size={22} /><strong>Ready to find your first contribution</strong><p>RepoLens will look for an isolated task with clear files and low risk.</p></div>
+          )}
+        </div>
+      </div>
+      {selected && (
+        <section className="section-block contribution-plan">
+          <div className="section-heading">
+            <div><span className="section-index">02</span><div><h2>Contribution details</h2><p>The smallest useful map for making the change confidently.</p></div></div>
+            <span className="difficulty-pill">{selected.difficulty}</span>
+          </div>
+          <div className="plan-grid">
+            <div className="plan-card"><span className="detail-label">PROBLEM</span><p>{selected.problem}</p></div>
+            <div className="plan-card"><span className="detail-label">WHERE TO WORK</span>{selected.whereToWork.map((file) => <span className="path-chip mono" key={file}><FileCode2 size={13} />{file}</span>)}</div>
+            <div className="plan-card plan-wide"><span className="detail-label">IMPLEMENTATION PLAN</span><ol>{selected.implementationPlan.map((step, index) => <li key={step}><span>{index + 1}</span><p>{step}</p></li>)}</ol></div>
+            <div className="plan-card"><span className="detail-label">FILES TO MODIFY</span>{selected.filesToModify.map((file) => <span className="path-line mono" key={file}><FileCode2 size={13} />{file}</span>)}</div>
+            <div className="plan-card"><span className="detail-label">FILES TO UNDERSTAND FIRST</span>{selected.filesToUnderstand.map((file) => <span className="path-line mono" key={file}><BookOpen size={13} />{file}</span>)}</div>
+          </div>
+        </section>
+      )}
+    </div>
+  )
+}

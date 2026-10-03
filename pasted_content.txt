@@ -1,0 +1,972 @@
+# Build RepoLens — AI Codebase Navigator
+
+Build a polished, production-style web application called **RepoLens**.
+
+## 1. Product concept
+
+RepoLens is an AI-powered tool that helps developers understand an unfamiliar GitHub repository and discover a realistic first contribution.
+
+The core experience:
+
+**GitHub Repository → Codebase Understanding → Visual Architecture → Contribution Recommendation → Implementation Plan → GitHub Issue**
+
+The product should feel like a tool created from scratch by a professional developer team, NOT like an AI chatbot wrapper.
+
+The UI, branding, navigation, component system, interactions, and information architecture must all be original.
+
+Do not copy the UI or visual design of existing repository-analysis products.
+
+---
+
+# 2. Primary user story
+
+A developer discovers an unfamiliar open-source GitHub repository.
+
+Instead of spending an hour reading the codebase, they paste the repository URL into RepoLens.
+
+RepoLens analyzes the repository and gives them:
+
+1. What the project does
+2. Technology stack
+3. Repository structure
+4. Visual architecture
+5. Important files
+6. How major components connect
+7. Beginner-friendly contribution opportunities
+8. Recommended files to modify
+9. Implementation steps
+10. A ready-to-use GitHub Issue
+
+The most important interaction is:
+
+> **"Find my first contribution."**
+
+---
+
+# 3. Main screen
+
+Create a visually impressive landing/dashboard interface.
+
+Header:
+
+**RepoLens**
+
+Subtitle:
+
+> Understand any codebase. Find where you can contribute.
+
+Navigation:
+
+* Analyze
+* Codebase Map
+* Contributions
+* Issues
+* About
+
+Hero section:
+
+### "Understand a repository before you touch the code."
+
+Input:
+
+```text
+Paste a GitHub repository URL...
+```
+
+Button:
+
+**Analyze Repository**
+
+Add a secondary button:
+
+**Try Demo Repository**
+
+Use a realistic example repository when running without backend integration.
+
+---
+
+# 4. Visual design
+
+The design should feel like a modern developer tool.
+
+Style:
+
+* dark developer-focused interface
+* premium SaaS aesthetic
+* subtle gradients
+* glass/solid layered cards
+* thin borders
+* strong typography
+* clean spacing
+* minimal animations
+* responsive
+* professional rather than flashy
+
+Avoid:
+
+* generic ChatGPT clone appearance
+* excessive glowing effects
+* huge gradients everywhere
+* cartoon illustrations
+* unnecessary animations
+* template-like dashboard design
+
+Use a consistent design system.
+
+Suggested colors:
+
+Background:
+#080B12
+
+Primary surface:
+#10151F
+
+Secondary surface:
+#151B27
+
+Borders:
+#263040
+
+Primary text:
+#F5F7FA
+
+Secondary text:
+#9AA4B2
+
+Accent:
+#7C5CFC
+
+Success:
+#32D583
+
+Warning:
+#F5B83D
+
+Danger:
+#F97066
+
+---
+
+# 5. Analyze Repository flow
+
+When the user enters a repository URL:
+
+Show a loading experience.
+
+Do NOT use a generic spinner.
+
+Instead display an analysis pipeline:
+
+```text
+✓ Repository detected
+
+✓ Reading project structure
+
+✓ Detecting technologies
+
+● Mapping dependencies
+
+○ Understanding architecture
+
+○ Finding contribution opportunities
+```
+
+Animate each stage.
+
+After analysis, transition into the repository dashboard.
+
+---
+
+# 6. Repository dashboard
+
+Create a high-quality dashboard.
+
+Top section:
+
+```text
+Repository Name
+Owner / Repository
+
+Description
+
+[GitHub] [Re-analyze]
+```
+
+Display:
+
+### Project Health
+
+Cards:
+
+* Languages
+* Framework
+* Files
+* Dependencies
+* Tests
+* Documentation
+
+Example:
+
+```text
+Languages
+
+TypeScript  62%
+Python      24%
+CSS          9%
+Other        5%
+```
+
+---
+
+# 7. AI Project Understanding
+
+Create a section called:
+
+## "What is this project?"
+
+Display an AI-generated summary.
+
+Example:
+
+> This is a full-stack developer platform built with React and FastAPI. The frontend communicates with REST APIs while PostgreSQL stores application data.
+
+Below it:
+
+### Core capabilities
+
+Use cards:
+
+* Authentication
+* API layer
+* Database
+* UI
+* AI services
+
+These should be generated from backend data later.
+
+For now create realistic mock data.
+
+---
+
+# 8. Codebase Map
+
+This is the visual centerpiece.
+
+Create an interactive architecture visualization.
+
+Example:
+
+```text
+                    RepoLens
+                       │
+        ┌──────────────┼──────────────┐
+        ↓              ↓              ↓
+    Frontend          API           Database
+        │              │              │
+     React          FastAPI       PostgreSQL
+        │              │
+     Pages         Services
+        │              │
+   Components ─────── Routes
+```
+
+Use React Flow or a comparable graph library.
+
+Nodes should be clickable.
+
+Clicking a node opens a side panel:
+
+```text
+src/api/auth.ts
+
+Purpose:
+Handles authentication requests.
+
+Used by:
+LoginPage
+RegisterPage
+SessionProvider
+
+Dependencies:
+authService
+APIClient
+```
+
+Add:
+
+* zoom
+* pan
+* node highlighting
+* search
+* fit-to-screen
+
+---
+
+# 9. File Explorer
+
+Create a repository tree.
+
+Example:
+
+```text
+📁 src
+ ├── 📁 components
+ │    ├── Button.tsx
+ │    ├── Navbar.tsx
+ │    └── UserCard.tsx
+ │
+ ├── 📁 pages
+ │    ├── Home.tsx
+ │    └── Dashboard.tsx
+ │
+ ├── 📁 services
+ │    └── api.ts
+ │
+ └── App.tsx
+```
+
+Clicking a file should show:
+
+* purpose
+* importance
+* dependencies
+* related files
+* AI explanation
+
+Do not implement a full IDE.
+
+The objective is repository understanding.
+
+---
+
+# 10. Killer feature — First Contribution
+
+Create a prominent section:
+
+# "Find my first contribution"
+
+Add a button:
+
+**Find a contribution**
+
+When clicked, show an AI-style analysis animation.
+
+Then display:
+
+```text
+YOUR RECOMMENDED CONTRIBUTION
+
+Add loading state to UserCard
+
+Difficulty
+● Beginner
+
+Estimated effort
+20–30 minutes
+
+Impact
+Medium
+
+Files involved
+3
+
+Risk
+Low
+```
+
+Then:
+
+### Why this contribution?
+
+Example:
+
+> This task is isolated from the backend and follows existing component patterns. It is a good starting point for someone unfamiliar with the project.
+
+---
+
+# 11. Contribution details
+
+Create a detailed contribution page.
+
+Sections:
+
+### Problem
+
+Explain what is missing.
+
+### Where to work
+
+Display exact files.
+
+Example:
+
+```text
+src/components/UserCard.tsx
+src/hooks/useUser.ts
+```
+
+### Implementation plan
+
+```text
+1. Add loading state to UserCard
+2. Read loading state from useUser()
+3. Add skeleton component
+4. Replace empty state
+5. Add component test
+```
+
+### Files to modify
+
+Display file cards.
+
+### Files to understand first
+
+Display prerequisite files.
+
+### Difficulty
+
+Use:
+
+```text
+Beginner
+Intermediate
+Advanced
+```
+
+Do not use numerical scoring.
+
+---
+
+# 12. Generate GitHub Issue
+
+Add:
+
+**Generate GitHub Issue**
+
+Generate a polished issue preview.
+
+Example:
+
+```text
+Title
+
+Add loading state to UserCard
+
+Description
+
+Currently UserCard does not provide visual feedback
+while user data is loading.
+
+Proposed solution
+
+Add a loading state using the existing skeleton
+component pattern.
+
+Implementation
+
+- Update UserCard.tsx
+- Read loading state from useUser()
+- Add skeleton UI
+- Add tests
+
+Acceptance criteria
+
+- Loading state is visible
+- Existing UI remains unchanged
+- Tests pass
+```
+
+Buttons:
+
+**Copy Issue**
+
+**Open GitHub**
+
+The Open GitHub button should be implemented as a placeholder until GitHub API integration is connected.
+
+---
+
+# 13. AI interaction design
+
+Do NOT create a generic chat window.
+
+Instead, AI should appear as contextual intelligence.
+
+Examples:
+
+Button:
+
+**Explain this file**
+
+Button:
+
+**Why is this dependency important?**
+
+Button:
+
+**Find contribution**
+
+Button:
+
+**Generate issue**
+
+Button:
+
+**Explain architecture**
+
+Responses should appear in relevant panels.
+
+The product should feel like an intelligent codebase interface rather than ChatGPT embedded into a website.
+
+---
+
+# 14. Search
+
+Add global repository search.
+
+Placeholder:
+
+```text
+Search files, components, dependencies...
+```
+
+Search results should display:
+
+```text
+UserCard.tsx
+Component
+
+api.ts
+Service
+
+UserProvider.tsx
+Context
+```
+
+Add keyboard shortcut:
+
+```text
+Ctrl + K
+```
+
+Create a command palette.
+
+Commands:
+
+* Search repository
+* Open architecture
+* Find contribution
+* Generate issue
+* Explain repository
+
+---
+
+# 15. Demo Mode
+
+This is extremely important.
+
+Create a fully functional **Demo Repository** mode.
+
+The application must work without any API key.
+
+When the user clicks:
+
+**Try Demo Repository**
+
+load a predefined fake/seeded repository dataset.
+
+The demo should show:
+
+* repository overview
+* architecture graph
+* files
+* technologies
+* contribution recommendation
+* generated issue
+
+This guarantees a reliable hackathon demo.
+
+Clearly label this:
+
+```text
+DEMO REPOSITORY
+```
+
+Do not pretend mock data came from a real analysis.
+
+---
+
+# 16. Backend/API architecture
+
+Prepare the frontend so that real backend services can be connected later.
+
+Create a clean API abstraction.
+
+Example:
+
+```text
+src/
+  api/
+    repository.ts
+    analysis.ts
+    contributions.ts
+    issues.ts
+```
+
+Create functions such as:
+
+```text
+analyzeRepository(url)
+
+getRepositoryStructure(id)
+
+getArchitecture(id)
+
+findContributions(id)
+
+generateIssue(contribution)
+```
+
+For now these functions can return mock data.
+
+Keep the mock implementation isolated.
+
+Do NOT hardcode mock data throughout UI components.
+
+---
+
+# 17. Future backend contract
+
+Design interfaces for:
+
+### POST
+
+```text
+/api/repositories/analyze
+```
+
+Input:
+
+```json
+{
+  "url": "https://github.com/example/repo"
+}
+```
+
+Response:
+
+```json
+{
+  "repository": {},
+  "technologies": [],
+  "files": [],
+  "architecture": {},
+  "contributions": []
+}
+```
+
+### POST
+
+```text
+/api/contributions/find
+```
+
+### POST
+
+```text
+/api/issues/generate
+```
+
+The frontend should be ready to consume these later.
+
+---
+
+# 18. Technology stack
+
+Use:
+
+* React
+* TypeScript
+* Vite
+* Tailwind CSS
+* shadcn/ui where useful
+* React Flow for architecture visualization
+* Lucide icons
+* Framer Motion for subtle transitions
+
+Keep dependencies reasonable.
+
+Do not introduce unnecessary frameworks.
+
+---
+
+# 19. Component architecture
+
+Create reusable components:
+
+```text
+components/
+  layout/
+  repository/
+  architecture/
+  contributions/
+  files/
+  issues/
+  command/
+  ui/
+```
+
+Examples:
+
+```text
+RepositoryHeader
+RepositoryStats
+TechnologyCard
+ArchitectureGraph
+FileTree
+FileDetails
+ContributionCard
+ContributionDetails
+IssuePreview
+AnalysisProgress
+CommandPalette
+```
+
+---
+
+# 20. Responsive behavior
+
+Desktop is the primary hackathon experience.
+
+Also support tablet/mobile reasonably.
+
+Architecture visualization should remain usable on smaller screens.
+
+---
+
+# 21. Loading and error states
+
+Implement polished states for:
+
+* invalid GitHub URL
+* repository not found
+* private repository
+* analysis failure
+* AI failure
+* empty repository
+* network error
+
+Example:
+
+```text
+We couldn't analyze this repository.
+
+Check that:
+✓ The URL is correct
+✓ The repository is public
+✓ GitHub is reachable
+
+[Try Again]
+```
+
+---
+
+# 22. Security
+
+Never expose API keys in frontend code.
+
+Use environment variables.
+
+Create:
+
+```text
+.env.example
+```
+
+with placeholders such as:
+
+```text
+GITHUB_TOKEN=
+AI_API_KEY=
+BACKEND_URL=
+```
+
+Do not include real credentials.
+
+---
+
+# 23. README
+
+Create a professional README containing:
+
+# RepoLens
+
+## One-line description
+
+AI-powered codebase navigation and contribution discovery.
+
+## Problem
+
+Understanding an unfamiliar open-source project can take hours.
+
+## Solution
+
+RepoLens maps a repository and identifies realistic contribution opportunities for developers.
+
+## Features
+
+* Repository understanding
+* Architecture visualization
+* File exploration
+* AI contribution discovery
+* Implementation plans
+* GitHub issue generation
+* Demo mode
+
+## Architecture
+
+```text
+GitHub
+   ↓
+Repository Analyzer
+   ↓
+Codebase Representation
+   ↓
+AI Analysis
+   ↓
+RepoLens UI
+```
+
+## Development
+
+Include setup instructions.
+
+## Environment variables
+
+Document `.env.example`.
+
+## Open source
+
+Include an appropriate open-source license.
+
+IMPORTANT:
+
+If this project uses or derives code from an existing open-source repository, clearly identify the upstream project and license and document our modifications. Do not claim upstream code as original work.
+
+---
+
+# 24. Hackathon demo optimization
+
+The entire product should support this 90-second demo:
+
+### 0–10 sec
+
+Paste repository URL.
+
+### 10–25 sec
+
+Show repository analysis.
+
+### 25–40 sec
+
+Show architecture graph.
+
+### 40–60 sec
+
+Click:
+
+**Find my first contribution**
+
+Show the recommended task.
+
+### 60–75 sec
+
+Show files + implementation plan.
+
+### 75–90 sec
+
+Click:
+
+**Generate GitHub Issue**
+
+Show polished issue.
+
+Final line:
+
+> "RepoLens turns the first hour of understanding an unfamiliar codebase into a few minutes."
+
+---
+
+# 25. Critical implementation rule
+
+Prioritize functionality over completeness.
+
+The application must have these working:
+
+1. Repository input
+2. Demo repository
+3. Repository dashboard
+4. Architecture visualization
+5. File explorer
+6. Contribution recommendation
+7. Contribution details
+8. GitHub Issue generation
+
+Everything else is secondary.
+
+Do not spend time building authentication, billing, user accounts, complex database systems, or deployment infrastructure.
+
+---
+
+# 26. Final visual quality requirement
+
+Before finishing, inspect every screen.
+
+The application should feel like:
+
+**Linear × GitHub × modern developer tooling**
+
+but must have its own identity.
+
+Use:
+
+* polished empty states
+* smooth transitions
+* consistent spacing
+* clear hierarchy
+* keyboard interactions
+* responsive cards
+* readable code blocks
+* subtle hover states
+
+No placeholder lorem ipsum.
+
+No broken buttons.
+
+No fake loading that never ends.
+
+Every visible button should either work or clearly indicate that it is a demo action.
+
+---
+
+# 27. Deliverables
+
+Produce:
+
+1. Complete React application
+2. Clean component architecture
+3. Demo repository dataset
+4. Mock API service layer
+5. Interactive architecture graph
+6. Contribution recommendation workflow
+7. GitHub issue generator
+8. Command palette
+9. Error/loading states
+10. `.env.example`
+11. Professional README
+12. Open-source LICENSE
+13. Clear comments explaining where real GitHub/AI APIs should be connected
+
+Build the application now.
+
+Prioritize a polished, working demo over adding more features.

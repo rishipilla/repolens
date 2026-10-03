@@ -1,0 +1,1 @@
+export { generateTests } from './repository'

@@ -1,0 +1,15 @@
+node_modules/
+dist/
+.env
+.env.*
+!.env.example
+backend/.env
+backend/.venv
+.DS_Store
+node_modules/
+.env
+backend/.env
+backend/.venv/
+__pycache__/
+*.pyc
+dist/
